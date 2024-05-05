@@ -18,6 +18,8 @@ type SimplifiedNote = {
   tags: Tag[];
   title: string;
   id: string;
+  text: string;
+  backgroundColor?: string;
 };
 
 type NoteListProps = {
@@ -59,16 +61,22 @@ const NoteList = ({
 
   return (
     <div>
-      <Row className="align-items-center mb-4">
+      <Row className="align-items-center  mb-4 text-white">
         <Col>
           <h1>Notes</h1>
         </Col>
         <Col xs="auto">
           <Stack gap={2} direction="horizontal">
             <Link to="/new">
-              <Button variant="primary">Create</Button>
+              <Button
+                variant="primary "
+                style={{ backgroundColor: "#31BFD2", border: "none" }}
+              >
+                Create
+              </Button>
             </Link>
             <Button
+              className="text-white"
               variant="outline-secondary"
               onClick={() => setEditTagsModalIsOpen(true)}
             >
@@ -78,7 +86,7 @@ const NoteList = ({
         </Col>
       </Row>
       <Form>
-        <Row className="mb-4">
+        <Row className="mb-4 text-white">
           <Col>
             <Form.Group controlId="title">
               <Form.Label>Title</Form.Label>
@@ -93,6 +101,7 @@ const NoteList = ({
             <Form.Group controlId="tags">
               <Form.Label>Tags</Form.Label>
               <ReactSelect
+                className="text-black"
                 isMulti
                 value={selectedTags.map((tag) => {
                   return { label: tag.label, value: tag.id };
@@ -114,11 +123,26 @@ const NoteList = ({
         </Row>
       </Form>
       <Row xs={1} sm={2} lg={3} xl={4} className="g-3">
-        {filteredNotes.map((note) => (
-          <Col key={note.id}>
-            <NoteCard id={note.id} title={note.title} tags={note.tags} />
-          </Col>
-        ))}
+        {filteredNotes.length ? (
+          filteredNotes.map((note) => (
+            <Col key={note.id}>
+              <NoteCard
+                id={note.id}
+                title={note.title}
+                tags={note.tags}
+                text={note.text}
+                backgroundColor={note?.backgroundColor}
+              />
+            </Col>
+          ))
+        ) : (
+          <div className="w-100 d-flex justify-content-center text-white mt-5 pt-5">
+            <div className="text-center ">
+              <p>No notes available. </p>
+              <h3>Create Your Notes </h3>
+            </div>
+          </div>
+        )}
       </Row>
       <EditTagsModal
         show={editTagsModalIsOpen}
@@ -131,27 +155,41 @@ const NoteList = ({
   );
 };
 
-const NoteCard = ({ id, title, tags }: SimplifiedNote) => {
+const NoteCard = ({
+  id,
+  title,
+  text,
+  tags,
+  backgroundColor,
+}: SimplifiedNote) => {
   return (
     <Card
       as={Link}
       to={`/${id}`}
-      className={`h-100 text-reset text-decoration-none ${styles.card}`}
+      className={` h-100 text-reset text-decoration-none ${styles.card} `}
+      style={{
+        backgroundColor: backgroundColor,
+        maxHeight: "300px",
+        overflow: "hidden",
+        padding: "10px",
+      }}
     >
-      <Card.Body>
-        <Stack
-          gap={2}
-          className="align-items-center justify-content-center h-100"
-        >
+      <Card.Body
+        className=" p-3"
+        style={{ padding: "10px", textOverflow: "ellipsis" }}
+      >
+        <Stack gap={2} className="justify-content-center h-200">
           <span className="fs-5">{title}</span>
+          <div className={`${styles.description} `}>
+            <p>{text}</p>
+          </div>
           {tags.length > 0 && (
-            <Stack
-              gap={1}
-              direction="horizontal"
-              className="justify-content-center flex-wrap"
-            >
+            <Stack gap={1} direction="horizontal" className=" flex-wrap">
               {tags.map((tag) => (
-                <Badge className="text-truncates" key={tag.id}>
+                <Badge
+                  className={`text-truncates  ${styles.badge}`}
+                  key={tag.id}
+                >
                   {tag.label}
                 </Badge>
               ))}

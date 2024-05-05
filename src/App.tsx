@@ -9,6 +9,7 @@ import NoteList from "./NoteList";
 import NoteLayout from "./NoteLayout";
 import Note from "./Note";
 import EditNote from "./EditNote";
+import "./App.css";
 
 export type Note = {
   id: string;
@@ -22,12 +23,14 @@ export type RawNoteData = {
   title: string;
   text: string;
   tagIds: string[];
+  backgroundColor?: string;
 };
 
 export type NoteData = {
   title: string;
   text: string;
   tags: Tag[];
+  backgroundColor?: string;
 };
 
 export type Tag = {
@@ -98,7 +101,7 @@ function App() {
   };
 
   return (
-    <Container className="my-4">
+    <Container>
       <Routes>
         <Route
           path="/"

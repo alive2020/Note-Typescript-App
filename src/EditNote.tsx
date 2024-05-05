@@ -12,11 +12,12 @@ const EditNote = ({ onSubmit, onAddTag, availableTags }: EditNoteProps) => {
   const note = useNote();
   return (
     <div>
-      <h1 className="mb-4">Edit Note</h1>
+      <h1 className="mb-4 text-white">Edit Note</h1>
       <NoteForm
         title={note.title}
         text={note.text}
         tags={note.tags}
+        backgroundColor={note.backgroundColor}
         onSubmit={(data) => onSubmit(note.id, data)}
         onAddTag={onAddTag}
         availableTags={availableTags}

@@ -15,7 +15,7 @@ const Note = ({ onDelete }: NoteProps) => {
     <div>
       <Row className="align-items-center mb-4">
         <Col>
-          <h1>{note.title}</h1>
+          <h1 className="text-white">{note.title}</h1>
           {note.tags.length > 0 && (
             <Stack gap={1} direction="horizontal" className="flex-wrap">
               {note.tags.map((tag) => (
@@ -29,7 +29,12 @@ const Note = ({ onDelete }: NoteProps) => {
         <Col xs="auto">
           <Stack gap={2} direction="horizontal">
             <Link to={`/${note.id}/edit`}>
-              <Button variant="primary">Edit</Button>
+              <Button
+                variant="primary"
+                style={{ backgroundColor: "#31BFD2", border: "none" }}
+              >
+                Edit
+              </Button>
             </Link>
             <Button
               variant="outline-danger"
@@ -46,7 +51,7 @@ const Note = ({ onDelete }: NoteProps) => {
           </Stack>
         </Col>
       </Row>
-      <ReactMarkdown>{note.text}</ReactMarkdown>
+      <ReactMarkdown className="text-white">{note.text}</ReactMarkdown>
     </div>
   );
 };

@@ -11,6 +11,41 @@ type NoteFormProps = {
   availableTags: Tag[];
 } & Partial<NoteData>;
 
+const colorOptions = [
+  {
+    value: "#FCE9FF",
+    label: (
+      <div
+        style={{ backgroundColor: "#FCE9FF", width: "20px", height: "20px" }}
+      ></div>
+    ),
+  },
+  {
+    value: "#F6FAFF",
+    label: (
+      <div
+        style={{ backgroundColor: "#F6FAFF", width: "20px", height: "20px" }}
+      ></div>
+    ),
+  },
+  {
+    value: "#EDFFEE",
+    label: (
+      <div
+        style={{ backgroundColor: "#EDFFEE", width: "20px", height: "20px" }}
+      ></div>
+    ),
+  },
+  {
+    value: "#FEF9ED",
+    label: (
+      <div
+        style={{ backgroundColor: "#FEF9ED", width: "20px", height: "20px" }}
+      ></div>
+    ),
+  },
+];
+
 const NoteForm = ({
   onSubmit,
   onAddTag,
@@ -18,10 +53,14 @@ const NoteForm = ({
   title = "",
   text = "",
   tags = [],
+  backgroundColor,
 }: NoteFormProps) => {
   const titleRef = useRef<HTMLInputElement>(null);
   const markdownRef = useRef<HTMLTextAreaElement>(null);
   const [selectedTags, setSelectedTags] = useState<Tag[]>(tags);
+  const [bgColor, setBackgroundColor] = useState<string>(
+    backgroundColor ? backgroundColor : "#FCE9FF"
+  );
 
   const navigate = useNavigate();
 
@@ -31,9 +70,15 @@ const NoteForm = ({
       title: titleRef.current!.value,
       text: markdownRef.current!.value,
       tags: selectedTags,
+      backgroundColor: bgColor,
     });
 
     navigate("..");
+  };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const handleBackgroundColorChange = (selectedOption: any) => {
+    setBackgroundColor(selectedOption.value);
   };
 
   return (
@@ -42,13 +87,13 @@ const NoteForm = ({
         <Row>
           <Col>
             <Form.Group controlId="title">
-              <Form.Label>Title</Form.Label>
+              <Form.Label className="text-white">Title</Form.Label>
               <Form.Control ref={titleRef} required defaultValue={title} />
             </Form.Group>
           </Col>
           <Col>
             <Form.Group controlId="tags">
-              <Form.Label>Tags</Form.Label>
+              <Form.Label className="text-white">Tags</Form.Label>
               <CreatableReactSelect
                 isMulti
                 value={selectedTags.map((tag) => {
@@ -75,7 +120,7 @@ const NoteForm = ({
           </Col>
         </Row>
         <Form.Group controlId="markdown">
-          <Form.Label>Body</Form.Label>
+          <Form.Label className="text-white">Body</Form.Label>
           <Form.Control
             ref={markdownRef}
             required
@@ -84,12 +129,48 @@ const NoteForm = ({
             defaultValue={text}
           />
         </Form.Group>
+        <Form.Group controlId="backgroundColor">
+          <Form.Label className="text-white">
+            Select Background Color
+          </Form.Label>
+          <CreatableReactSelect
+            value={colorOptions.find((option) => option.value === bgColor)}
+            options={colorOptions}
+            onChange={handleBackgroundColorChange}
+            styles={{
+              control: (provided) => ({
+                ...provided,
+                width: "200px",
+              }),
+              menu: (provided) => ({
+                ...provided,
+                width: "200px",
+              }),
+              option: (provided, state) => ({
+                ...provided,
+                backgroundColor: state.data.value,
+                width: "20px",
+                height: "20px",
+                margin: 0,
+                padding: 0,
+              }),
+            }}
+          />
+        </Form.Group>
         <Stack direction="horizontal" gap={2} className="justify-content-end">
-          <Button type="submit" variant="primary">
+          <Button
+            type="submit"
+            variant="primary"
+            style={{ backgroundColor: "#31BFD2", border: "none" }}
+          >
             Save
           </Button>
           <Link to="..">
-            <Button type="button" variant="outline-secondary">
+            <Button
+              type="button"
+              variant="outline-secondary"
+              className="text-white"
+            >
               Cancel
             </Button>
           </Link>

@@ -7,3 +7,14 @@
   translate: 0 -5px;
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2);
 }
+
+.description {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.badge {
+  background-color: #31bfd2 !important; /* Your desired background color */
+}
