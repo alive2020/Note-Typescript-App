@@ -1,32 +1,93 @@
-# Notes App on React + TypeScript + Vite
+
+# Note App
+
+This is a Note CRUD application built with React and TypeScript, where you can add notes with a title and description, create new tags, add existing tags to notes, and filter notes by tags. This project serves as a practice for using TypeScript in a React application.
 
 Check out the live demo [here](https://ice-notes-app.netlify.app/)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Table of Contents
 
-Currently, two official plugins are available:
+- [Getting Started](#getting-started)
+- [Available Scripts](#available-scripts)
+- [Dependencies](#dependencies)
+- [Dev Dependencies](#dev-dependencies)
+- [Features](#features)
+- [License](#license)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Getting Started
 
-## Expanding the ESLint configuration
+To get a local copy of the project up and running, follow these simple steps:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/your-username/note-app.git
+    cd note-app
+    ```
 
-- Configure the top-level `parserOptions` property like this:
+2. Install dependencies:
+    ```bash
+    npm install
+    ```
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-    project: ["./tsconfig.json", "./tsconfig.node.json"],
-    tsconfigRootDir: __dirname,
-  },
-};
-```
+3. Run the development server:
+    ```bash
+    npm run dev
+    ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Available Scripts
+
+In the project directory, you can run:
+
+### `npm run dev`
+
+Runs the app in development mode. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+### `npm run build`
+
+Builds the app for production. It compiles TypeScript and bundles the app with Vite.
+
+### `npm run lint`
+
+Runs ESLint to check for linting errors. The configuration ensures no unused directives and zero warnings.
+
+### `npm run preview`
+
+Previews the production build locally.
+
+## Dependencies
+
+- `bootstrap`: ^5.3.3
+- `react`: ^18.2.0
+- `react-bootstrap`: ^2.10.2
+- `react-dom`: ^18.2.0
+- `react-markdown`: ^9.0.1
+- `react-router-dom`: ^6.22.3
+- `react-select`: ^5.8.0
+- `uuid`: ^9.0.1
+
+## Dev Dependencies
+
+- `@types/react`: ^18.2.66
+- `@types/react-dom`: ^18.2.22
+- `@types/uuid`: ^9.0.8
+- `@typescript-eslint/eslint-plugin`: ^7.2.0
+- `@typescript-eslint/parser`: ^7.2.0
+- `@vitejs/plugin-react`: ^4.2.1
+- `eslint`: ^8.57.0
+- `eslint-plugin-react-hooks`: ^4.6.0
+- `eslint-plugin-react-refresh`: ^0.4.6
+- `typescript`: ^5.2.2
+- `vite`: ^5.2.0
+
+## Features
+
+- Add a note with a title and description.
+- Create new tags or add existing tags to notes.
+- Filter notes by tags.
+- Practice using TypeScript in a React application.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
